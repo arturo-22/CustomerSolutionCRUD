@@ -1,0 +1,64 @@
+# .NET Core
+bin/
+obj/
+project.lock.json
+project.fragment.lock.json
+*.dll
+*.exe
+*.pdb
+*.app
+*.apk
+*.appx
+*.appxbundle
+*.nupkg
+*.snupkg
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.ide
+*.vspscc
+*.vssscc
+
+# Rider
+.idea/
+*.sln.iml
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Rr]eleases/
+[Oo]ut/
+[Aa]ssets/
+[Aa]ssets/**/*.js
+[Aa]ssets/**/*.css
+
+# Entity Framework
+*.sqlite
+*.db
+*.db-journal
+
+# NuGet Packages
+*.nupkg
+**/packages/*
+**/packages/*.nupkg
+
+# Azure Web Apps
+*.Publish.xml
+*.deploy.cmd
+
+# Other files
+*.log
+*.tlog
+*.cache
+*.vspscc
+*.vssscc
+*.d.ts
+*.scc
+
+# Rider
+.idea/
+*.sln.iml
