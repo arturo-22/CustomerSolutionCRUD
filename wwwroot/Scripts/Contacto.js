@@ -69,7 +69,7 @@ document.getElementById('openModalContacto').addEventListener('click', function 
         });
 });
 
-// Abrir el modal con los datos seleccionados
+// Abrir el modal contacto con los datos seleccionados
 document.getElementById('openModalSelectedContacto').addEventListener('click', function () {
 
     if (!selectedContacto) {
@@ -102,7 +102,7 @@ document.getElementById('openModalSelectedContacto').addEventListener('click', f
         });
 });
 
-//Modal confirmacion 
+//Modal confirmacion contacto
 document.getElementById('openModalConfirmacion').addEventListener('click', function () {
 
     if (!selectedContacto) {
@@ -162,14 +162,12 @@ function setNuevoClienteId() {
 
     let lastId = 0;
     if (lastRow) {
-        // Obtiene el último ID de la tabla
         lastId = parseInt(lastRow.cells[0].textContent);
     }
 
-    const nuevoId = lastId + 1; // El siguiente ID será el último ID + 1
+    const nuevoId = lastId + 1; 
 
-    // Establece el valor del campo ID en el modal y lo bloquea
-    const idField = document.getElementById('id'); // Asegúrate de que el input tenga id="id"
+    const idField = document.getElementById('id');
     idField.value = nuevoId;
 }
 

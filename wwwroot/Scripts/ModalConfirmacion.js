@@ -7,7 +7,6 @@ document.getElementById('btnModalEliminar').addEventListener('click', async () =
 
         await eliminarCliente(clienteIdSeleccionado);
 
-        // Cierra el modal después de eliminar
         const modalElement = document.getElementById('modalConfirmacion');
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();

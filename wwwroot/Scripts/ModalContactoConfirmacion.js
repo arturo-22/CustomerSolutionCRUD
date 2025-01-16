@@ -1,4 +1,4 @@
-﻿//Eliminar Cliente
+﻿//Eliminar Contacto
 document.getElementById('btnModalContactoEliminar').addEventListener('click', async () => {
     try {
         if (!contactoIdSeleccionado) {
@@ -7,7 +7,6 @@ document.getElementById('btnModalContactoEliminar').addEventListener('click', as
 
         await eliminarContacto(contactoIdSeleccionado);
 
-        // Cierra el modal después de eliminar
         const modalElement = document.getElementById('modalContactoConfirmacion');
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();

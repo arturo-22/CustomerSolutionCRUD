@@ -5,7 +5,6 @@ async function guardarContacto() {
     const telefono = document.getElementById('telefono').value;
     const email = document.getElementById('email').value;
 
-    // Validación básica
     if (!nombre || !telefono || !email) {
         alert("Todos los campos son obligatorios.");
         return;
@@ -42,14 +41,13 @@ async function guardarContacto() {
 
 // Actualizar Contacto
 async function actualizarContacto() {
-    // Obtener los datos del formulario
+
     const id = selectedContacto.id;
     const clienteId = idCliente;
     const nombre = document.getElementById('nombre').value;
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
 
-    // Validación básica
     if (!nombre || !telefono || !email) {
         alert("Todos los campos son obligatorios.");
         return;
@@ -63,7 +61,7 @@ async function actualizarContacto() {
     };
 
     try {
-        // Enviar los datos al servidor con PUT
+
         const response = await fetch('/Contactos/Actualizar', {
             method: 'PUT',
             headers: {

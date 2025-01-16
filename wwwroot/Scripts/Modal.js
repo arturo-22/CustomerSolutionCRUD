@@ -5,7 +5,6 @@ async function guardarCliente() {
     const codigoPostal = document.getElementById('codigoPostal').value;
     const poblacion = document.getElementById('poblacion').value;
 
-    // Validación básica
     if (!nombre || !direccion || !codigoPostal || !poblacion) {
         alert("Todos los campos son obligatorios.");
         return;
@@ -48,13 +47,11 @@ async function actualizarCliente() {
     const codigoPostal = document.getElementById('codigoPostal').value;
     const poblacion = document.getElementById('poblacion').value;
 
-    // Validación básica
     if (!nombre || !domicilio || !codigoPostal || !poblacion) {
         alert("Todos los campos son obligatorios.");
         return;
     }
 
-    // Crear objeto cliente actualizado
     const clienteActualizado = {
         id,
         nombre,
@@ -64,7 +61,6 @@ async function actualizarCliente() {
     };
 
     try {
-        // Enviar los datos al servidor con PUT
         const response = await fetch('/Clientes/Actualizar', {
             method: 'PUT',
             headers: {

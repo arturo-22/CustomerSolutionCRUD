@@ -67,7 +67,7 @@ document.getElementById('openModal').addEventListener('click', function () {
         });
 });
 
-// Abrir el modal con los datos seleccionado
+// Abrir el modal con los datos seleccionados
 document.getElementById('openModalSelected').addEventListener('click', function () {
 
     if (!selectedCliente) {
