@@ -1,6 +1,7 @@
 ﻿//Carga Datos Clientes
 const tableBody = document.querySelector("#table_clientes tbody");
 let selectedCliente = null;
+let clienteIdSeleccionado = null;
 
 const loadClientes = async () => {
     try {
@@ -67,6 +68,7 @@ document.getElementById('openModal').addEventListener('click', function () {
 
 // Abrir el modal con los datos seleccionado
 document.getElementById('openModalSelected').addEventListener('click', function () {
+
     if (!selectedCliente) {
         alert("Por favor, selecciona un cliente primero.");
         return;
@@ -99,6 +101,37 @@ document.getElementById('openModalSelected').addEventListener('click', function 
         });
 });
 
+//Modal confirmacion 
+document.getElementById('eliminarCliente').addEventListener('click', function () {
+
+    if (!selectedCliente) {
+        alert("Por favor, selecciona un cliente primero.");
+        return;
+    }
+
+    clienteIdSeleccionado = selectedCliente.id;
+
+    fetch('Views/Clientes/ModalConfirmacion.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar el contenido del modal');
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('modalContainer').innerHTML = data;
+
+            const modalElement = document.getElementById('modalConfirmacion');
+            var modal = new bootstrap.Modal(modalElement);
+            modal.show();
+
+            loadModalConfirmacionScript();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
 // Eliminar Cliente
 async function eliminarCliente(id) {
     try {
@@ -112,27 +145,14 @@ async function eliminarCliente(id) {
 
         await loadClientes();
 
-        alert("Cliente eliminado exitosamente.");
-
         selectedCliente = null;
+
+        loadModalConfirmacionScript();
 
     } catch (error) {
         console.error('Error:', error);
     }
 }
-
-document.getElementById('eliminarCliente').addEventListener('click', function () {
-
-    if (!selectedCliente) {
-        alert("Por favor, selecciona un cliente primero.");
-        return;
-    }
-
-    let clienteId = selectedCliente.id;
-
-    eliminarCliente(clienteId);
-
-});
 
 //Numero de Id que sigue
 function setNuevoClienteId() {
@@ -172,5 +192,8 @@ function loadModalScript() {
     document.body.appendChild(modalScript);
 }
 
-
-
+function loadModalConfirmacionScript() {
+    const modalScript = document.createElement("script");
+    modalScript.src = "/Scripts/ModalConfirmacion.js";
+    document.body.appendChild(modalScript);
+}
