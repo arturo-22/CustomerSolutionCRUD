@@ -20,6 +20,12 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Views"
 });
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Contactos")),
+    RequestPath = "/Contactos"
+});
+
 app.UseDefaultFiles();
 
 app.UseStaticFiles();

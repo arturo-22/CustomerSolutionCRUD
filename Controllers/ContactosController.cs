@@ -13,62 +13,57 @@ namespace CustomerSolutionCRUD.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetContactos()
+        public IActionResult GetContactos(int idClienteSeleccionado)
         {
-            var clientes = _context.ContactosCliente.ToList();
-            return Json(clientes);
+            var contactos = _context.ContactosCliente.Where(e => e.ClienteId == idClienteSeleccionado).ToList();
+            return Json(contactos);
         }
 
 
         [HttpPost]
-        public IActionResult Guardar([FromBody] ContactosCliente nuevoCliente)
+        public IActionResult Guardar([FromBody] ContactosCliente nuevoContacto)
         {
-            if (nuevoCliente == null)
+            if (nuevoContacto == null)
                 return BadRequest();
 
-            _context.ContactosCliente.Add(nuevoCliente);
+            _context.ContactosCliente.Add(nuevoContacto);
             _context.SaveChanges();
 
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Actualizar([FromBody] ContactosCliente clienteActualizado)
+        public IActionResult Actualizar([FromBody] ContactosCliente ContactoActualizado)
         {
-            if (clienteActualizado == null || clienteActualizado.Id <= 0)
+            var contactoExistente = _context.ContactosCliente.FirstOrDefault(c => c.Id == ContactoActualizado.Id);
+
+            if (contactoExistente == null)
             {
-                return BadRequest("Datos inválidos.");
+                return NotFound("Contacto no encontrado.");
             }
 
-            var clienteExistente = _context.Clientes.FirstOrDefault(c => c.Id == clienteActualizado.Id);
-
-            if (clienteExistente == null)
-            {
-                return NotFound("Cliente no encontrado.");
-            }
-
-            clienteExistente.Nombre = clienteActualizado.Nombre;
-            clienteExistente.Domicilio = clienteActualizado.Telefono;
-            clienteExistente.CodigoPostal = clienteActualizado.Email;
+            contactoExistente.Nombre = ContactoActualizado.Nombre;
+            contactoExistente.Email = ContactoActualizado.Email;
+            contactoExistente.Telefono = ContactoActualizado.Telefono;
 
             _context.SaveChanges();
 
-            return Ok("Cliente actualizado exitosamente.");
+            return Ok("Contacto actualizado exitosamente.");
         }
 
         [HttpDelete]
-        public IActionResult Eliminar(int id)
+        public IActionResult Eliminar(int idContacto)
         {
-            var clienteExistente = _context.ContactosCliente.FirstOrDefault(e => e.Id == id);
-            if (clienteExistente == null)
+            var contactoExistente = _context.ContactosCliente.FirstOrDefault(e => e.Id == idContacto);
+            if (contactoExistente == null)
             {
-                return NotFound("Cliente no encontrado.");
+                return NotFound("Contacto no encontrado.");
             }
 
-            _context.ContactosCliente.Remove(clienteExistente);
+            _context.ContactosCliente.Remove(contactoExistente);
             _context.SaveChanges();
 
-            return Ok("Cliente eliminado exitosamente.");
+            return Ok("Contacto eliminado exitosamente.");
         }
     }
 }

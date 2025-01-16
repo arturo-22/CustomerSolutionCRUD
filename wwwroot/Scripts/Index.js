@@ -156,6 +156,19 @@ async function eliminarCliente(id) {
     }
 }
 
+//Abrir pantalla Contactos
+document.getElementById('openContactos').addEventListener('click', function () {
+
+    if (!selectedCliente) {
+        alert("Por favor, selecciona un cliente primero.");
+        return;
+    }
+
+    const IdCliente = selectedCliente.id;
+    localStorage.setItem('clienteIdSeleccionado', IdCliente);
+    window.location.href = '/Contactos/Contacto.html';
+});
+
 //Numero de Id que sigue
 function setNuevoClienteId() {
     const rows = document.querySelectorAll("#table_clientes tbody tr");
