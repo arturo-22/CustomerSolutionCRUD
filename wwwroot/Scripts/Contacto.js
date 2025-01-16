@@ -155,6 +155,10 @@ async function eliminarContacto(id) {
     }
 }
 
+document.getElementById('btnVolver').addEventListener('click', function () {
+    window.history.back();
+});
+
 //Numero de Id que sigue
 function setNuevoClienteId() {
     const rows = document.querySelectorAll("#table_contactos tbody tr");
