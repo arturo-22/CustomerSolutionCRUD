@@ -74,6 +74,8 @@ document.getElementById('openModalSelected').addEventListener('click', function 
         return;
     }
 
+    clienteIdSeleccionado = selectedCliente.id;
+
     fetch('Views/Clientes/Modal.html')
         .then(response => {
             if (!response.ok) {
@@ -161,14 +163,12 @@ function setNuevoClienteId() {
 
     let lastId = 0;
     if (lastRow) {
-        // Obtiene el último ID de la tabla
         lastId = parseInt(lastRow.cells[0].textContent);
     }
 
-    const nuevoId = lastId + 1; // El siguiente ID será el último ID + 1
+    const nuevoId = lastId + 1;
 
-    // Establece el valor del campo ID en el modal y lo bloquea
-    const idField = document.getElementById('id'); // Asegúrate de que el input tenga id="id"
+    const idField = document.getElementById('id');
     idField.value = nuevoId;
 }
 
@@ -181,7 +181,6 @@ document.body.addEventListener('click', (event) => {
         if (selectedRow) {
             selectedRow.classList.remove("selected");
         }
-        selectedCliente = null;
     }
 });
 

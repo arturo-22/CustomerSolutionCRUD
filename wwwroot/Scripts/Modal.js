@@ -42,7 +42,7 @@ async function guardarCliente() {
 
 // Actualizar Cliente
 async function actualizarCliente() {
-    // Obtener los datos del formulario
+    const id = clienteIdSeleccionado;
     const nombre = document.getElementById('nombre').value;
     const domicilio = document.getElementById('direccion').value;
     const codigoPostal = document.getElementById('codigoPostal').value;
@@ -56,7 +56,7 @@ async function actualizarCliente() {
 
     // Crear objeto cliente actualizado
     const clienteActualizado = {
-        id: clienteId,
+        id,
         nombre,
         domicilio,
         codigoPostal,
