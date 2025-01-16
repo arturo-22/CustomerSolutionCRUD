@@ -4,42 +4,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerSolutionCRUD.Controllers
 {
-    public class ClientesController : Controller
+    public class ContactosController : Controller
     {
         private readonly CustomerManagementDbContext _context;
-        public ClientesController(CustomerManagementDbContext context) 
+        public ContactosController(CustomerManagementDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Clientes", "Index.html");
-            return PhysicalFile(filePath, "text/html");
-        }
-
         [HttpGet]
-        public IActionResult GetClientes()
+        public IActionResult GetContactos()
         {
-            var clientes = _context.Clientes.ToList();
+            var clientes = _context.ContactosCliente.ToList();
             return Json(clientes);
         }
 
 
         [HttpPost]
-        public IActionResult Guardar([FromBody] Clientes nuevoCliente)
+        public IActionResult Guardar([FromBody] ContactosCliente nuevoCliente)
         {
             if (nuevoCliente == null)
                 return BadRequest();
 
-            _context.Clientes.Add(nuevoCliente);
+            _context.ContactosCliente.Add(nuevoCliente);
             _context.SaveChanges();
 
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Actualizar([FromBody] Clientes clienteActualizado)
+        public IActionResult Actualizar([FromBody] ContactosCliente clienteActualizado)
         {
             if (clienteActualizado == null || clienteActualizado.Id <= 0)
             {
@@ -54,9 +48,8 @@ namespace CustomerSolutionCRUD.Controllers
             }
 
             clienteExistente.Nombre = clienteActualizado.Nombre;
-            clienteExistente.Domicilio = clienteActualizado.Domicilio;
-            clienteExistente.CodigoPostal = clienteActualizado.CodigoPostal;
-            clienteExistente.Poblacion = clienteActualizado.Poblacion;
+            clienteExistente.Domicilio = clienteActualizado.Telefono;
+            clienteExistente.CodigoPostal = clienteActualizado.Email;
 
             _context.SaveChanges();
 
@@ -66,17 +59,16 @@ namespace CustomerSolutionCRUD.Controllers
         [HttpDelete]
         public IActionResult Eliminar(int id)
         {
-            var clienteExistente = _context.Clientes.FirstOrDefault(e => e.Id == id);
+            var clienteExistente = _context.ContactosCliente.FirstOrDefault(e => e.Id == id);
             if (clienteExistente == null)
             {
                 return NotFound("Cliente no encontrado.");
             }
 
-            _context.Clientes.Remove(clienteExistente);
+            _context.ContactosCliente.Remove(clienteExistente);
             _context.SaveChanges();
 
             return Ok("Cliente eliminado exitosamente.");
         }
-
     }
 }
