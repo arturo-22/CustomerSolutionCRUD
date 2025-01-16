@@ -75,9 +75,9 @@ async function actualizarContacto() {
         if (!response.ok) {
             throw new Error('Error al actualizar el contacto');
         }
-        await guardarContacto();
+        await loadContactos();
 
-        const modal = bootstrap.Modal.getInstance(document.getElementById('modal'));
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalContacto'));
         modal.hide();
 
     } catch (error) {
@@ -101,6 +101,10 @@ document.getElementById('guardarContacto').addEventListener('click', function ()
 document.querySelector('#modalContacto form').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         e.preventDefault();
-        guardarContacto();
+        if (modalMode === "Nuevo") {
+            guardarContacto();
+        } else if (modalMode === "Actualizar") {
+            actualizarContacto();
+        }
     }
 });

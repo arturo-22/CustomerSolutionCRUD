@@ -52,9 +52,9 @@ namespace CustomerSolutionCRUD.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Eliminar(int idContacto)
+        public IActionResult Eliminar(int id)
         {
-            var contactoExistente = _context.ContactosCliente.FirstOrDefault(e => e.Id == idContacto);
+            var contactoExistente = _context.ContactosCliente.FirstOrDefault(e => e.Id == id);
             if (contactoExistente == null)
             {
                 return NotFound("Contacto no encontrado.");

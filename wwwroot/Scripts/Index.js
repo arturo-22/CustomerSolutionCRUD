@@ -1,7 +1,8 @@
-﻿//Carga Datos Clientes
-const tableBody = document.querySelector("#table_clientes tbody");
-let selectedCliente = null;
+﻿let selectedCliente = null;
 let clienteIdSeleccionado = null;
+
+//Carga Datos Clientes
+const tableBody = document.querySelector("#table_clientes tbody");
 
 const loadClientes = async () => {
     try {
@@ -164,8 +165,9 @@ document.getElementById('openContactos').addEventListener('click', function () {
         return;
     }
 
-    const IdCliente = selectedCliente.id;
-    localStorage.setItem('clienteIdSeleccionado', IdCliente);
+    const idCliente = selectedCliente.id;
+    localStorage.setItem('clienteIdSeleccionado', idCliente);
+
     window.location.href = '/Contactos/Contacto.html';
 });
 

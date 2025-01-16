@@ -8,7 +8,7 @@ const idCliente = localStorage.getItem('clienteIdSeleccionado');
 const loadContactos = async () => {
     try {
         if (!idCliente) {
-            throw new Error("No se recibió el ID del cliente.");
+            throw new Error("No se recibió el ID del contacto.");
         }
         const response = await fetch(`/Contactos/GetContactos?idClienteSeleccionado=${idCliente}`);
         if (!response.ok) throw new Error("Error al obtener los datos");
@@ -103,7 +103,7 @@ document.getElementById('openModalSelectedContacto').addEventListener('click', f
 });
 
 //Modal confirmacion 
-document.getElementById('eliminarContacto').addEventListener('click', function () {
+document.getElementById('openModalConfirmacion').addEventListener('click', function () {
 
     if (!selectedContacto) {
         alert("Por favor, selecciona un contacto primero");
@@ -111,9 +111,8 @@ document.getElementById('eliminarContacto').addEventListener('click', function (
     }
 
     contactoIdSeleccionado = selectedContacto.id;
-    modalConfirmacionMode = "Contacto"
 
-    fetch('/Clientes/ModalConfirmacion.html')
+    fetch('/Views/Contactos/ModalContactoConfirmacion.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al cargar el contenido del modal');
@@ -123,18 +122,18 @@ document.getElementById('eliminarContacto').addEventListener('click', function (
         .then(data => {
             document.getElementById('modalContainer').innerHTML = data;
 
-            const modalElement = document.getElementById('modalConfirmacion');
+            const modalElement = document.getElementById('modalContactoConfirmacion');
             var modal = new bootstrap.Modal(modalElement);
             modal.show();
 
-            loadModalConfirmacionScript();
+            loadModalContactoConfirmacionScript();
         })
         .catch(error => {
             console.error('Error:', error);
         });
 });
 
-// Eliminar Cliente
+// Eliminar Contacto
 async function eliminarContacto(id) {
     try {
         const response = await fetch(`/Contactos/Eliminar/${id}`, {
@@ -142,14 +141,14 @@ async function eliminarContacto(id) {
         });
 
         if (!response.ok) {
-            throw new Error('Error al eliminar el cliente');
+            throw new Error('Error al eliminar el contacto');
         }
 
-        await loadClientes();
+        await loadContactos();
 
         selectedContacto = null;
 
-        loadModalConfirmacionScript();
+        loadModalContactoConfirmacionScript();
 
     } catch (error) {
         console.error('Error:', error);
@@ -181,8 +180,8 @@ function loadModalContactoScript() {
     document.body.appendChild(modalScript);
 }
 
-function loadModalConfirmacionScript() {
+function loadModalContactoConfirmacionScript() {
     const modalScript = document.createElement("script");
-    modalScript.src = "/Scripts/ModalConfirmacion.js";
+    modalScript.src = "/Scripts/ModalContactoConfirmacion.js";
     document.body.appendChild(modalScript);
 }

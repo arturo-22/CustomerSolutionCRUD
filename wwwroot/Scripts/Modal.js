@@ -102,6 +102,6 @@ document.getElementById('guardar').addEventListener('click', function () {
 document.querySelector('#modal form').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         e.preventDefault();
-        guardarCliente();
+            guardarCliente();
     }
 });
